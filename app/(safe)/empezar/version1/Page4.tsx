@@ -15,7 +15,7 @@ export default function Page4({
   useEffect(() => {
     if (playerRef.current && !playerRef.current.querySelector('vturb-smartplayer')) {
       const el = document.createElement('vturb-smartplayer');
-      el.id = 'vid-vid-6940a540e112bb88a007fb6e';
+      el.id = 'vid-6940a540e112bb88a007fb6e';
       el.style.display = 'block';
       el.style.margin = '0 auto';
       el.style.width = '100%';
@@ -30,7 +30,7 @@ export default function Page4({
         {/* Video Player */}
         <div className="w-full rounded-3xl overflow-hidden">
           <div ref={playerRef}></div>
-          <Script id="vturb-vid-vid-6940a540e112bb88a007fb6e" strategy="afterInteractive">
+          <Script id="vturb-vid-6940a540e112bb88a007fb6e" strategy="afterInteractive">
             {`
               var s=document.createElement("script");
               s.src="https://scripts.converteai.net/7811ed69-550c-4b89-9a28-8ab5dbe8db56/players/6940a540e112bb88a007fb6e/v4/player.js";
