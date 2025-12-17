@@ -1,19 +1,16 @@
 // API CREDENTIALS
 
-const PROXYCHECK_API_KEY = '5386xq-81b1y2-o1mj83-956925';
-const ABSTRACT_API_KEY = '3c9b0ec81cac4e3a905ce351b0d5ccb7';
+const PROXYCHECK_API_KEY = '91z0m5-f9999f-569085-69f027'; 
+// const ABSTRACT_API_KEY = '3c9b0ec81cac4e3a905ce351b0d5ccb7';
 const IPINFO_API_KEY = 'e549c4829f6b7c';
 
 // SET FILTER DATA
 
 const blockedCountryList = ['BR', 'RU', 'KP', 'IR'];
 
-export async function isSuspiciousIP(ip: string): Promise<boolean> {
-
+export async function isSuspiciousIP(ip: string, headers: Headers): Promise<boolean> {
   try {
-
     // PROXY CHECK
-
     const proxyCheckResponse = await fetch(`https://proxycheck.io/v2/${ip}?key=${PROXYCHECK_API_KEY}&vpn=1&asn=1`);
     const proxyCheckData = await proxyCheckResponse.json();
 
@@ -32,28 +29,26 @@ export async function isSuspiciousIP(ip: string): Promise<boolean> {
       return true;
     };
 
-    // ABSTRACT CHECK
+    // ABSTRACT CHECK - DESATIVADO
+    // const abstractResponse = await fetch(`https://ip-intelligence.abstractapi.com/v1/?api_key=${ABSTRACT_API_KEY}&ip_address=${ip}`);
+    // const abstractData = await abstractResponse.json();
 
-    const abstractResponse = await fetch(`https://ip-intelligence.abstractapi.com/v1/?api_key=${ABSTRACT_API_KEY}&ip_address=${ip}`);
-    const abstractData = await abstractResponse.json();
+    // console.log('AbstractAPI:', abstractData);
 
-    console.log('AbstractAPI:', abstractData);
+    // if (abstractData?.security?.is_vpn || abstractData?.security?.is_proxy || abstractData?.security?.is_tor) {
+    //   console.log('PROXY / VPN DETECTED BY ABSTRACT API');
+    //   return true;
+    // };
 
-    if (abstractData?.security?.is_vpn || abstractData?.security?.is_proxy || abstractData?.security?.is_tor) {
-      console.log('PROXY / VPN DETECTED BY ABSTRACT API');
-      return true;
-    };
+    // const abstractCountry = abstractData?.location?.country_code;
+    // const abstractapiBlockedCountry = blockedCountryList.includes(abstractCountry);
 
-    const abstractCountry = abstractData?.location?.country_code;
-    const abstractapiBlockedCountry = blockedCountryList.includes(abstractCountry);
-
-    if (abstractapiBlockedCountry) {
-      console.log('BLOCKED COUNTRY BY ABSTRACT API');
-      return true;
-    };
+    // if (abstractapiBlockedCountry) {
+    //   console.log('BLOCKED COUNTRY BY ABSTRACT API');
+    //   return true;
+    // };
 
     // DATACENTER CHECK
-
     const ipInfoResponse = await fetch(`https://ipinfo.io/${ip}/json?token=${IPINFO_API_KEY}`);
     const ipInfoData = await ipInfoResponse.json();
 
@@ -80,5 +75,4 @@ export async function isSuspiciousIP(ip: string): Promise<boolean> {
   };
   
   return false;
-
 };

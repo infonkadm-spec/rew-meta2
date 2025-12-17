@@ -3,25 +3,20 @@ import Button from "@/components/Button";
 import Balance from "@/components/Balance";
 import ConfettiEffect from "@/components/Confetti";
 import PixelV2 from "@/components/pixels/PixelV2";
-import PixelMeta from "@/components/pixels/PixelMeta";
-import { headers, cookies } from "next/headers";
+import { headers } from "next/headers";
 
 export default async function Page() {
   // GET DOMAIN ID
   const hdrs = await headers();
   const domainId = hdrs.get("x-domain-id") || "1";
   const url = hdrs.get("x-url") || "";
-  
-  // CHECK IF CAT PARAM IS PRESENT (Meta Ads traffic)
-  const cks = await cookies();
-  const catValid = cks.get('cat_valid')?.value === '1';
 
   const promoLinks: Record<string, string> = {
-    "1": "https://pay.hotmart.com/M103047413I?off=y7za886w",
-    "2": "https://pay.hotmart.com/M103047413I?off=y7za886w",
-    "3": "https://pay.hotmart.com/M103047413I?off=y7za886w",
+    "1": "https://site.burnerhot.com/yt-checkout-17usd",
+    "2": "https://site.burnerhot.com/yt-checkout-17usd",
+    "3": "https://site.burnerhot.com/yt-checkout-17usd",
   };
-  let promoLink = promoLinks[domainId] || "https://pay.hotmart.com/M103047413I?off=y7za886w";
+  let promoLink = promoLinks[domainId] || "https://site.burnerhot.com/yt-checkout-17usd";
 
   // Repassar todos os parâmetros UTM da URL atual para o promoLink
   try {
@@ -59,7 +54,7 @@ export default async function Page() {
           <span>⬇️ Just this page ⬇️</span>
           <div className="flex flex-col gap-1.5 rounded-lg border-2 border-dashed p-4 bg-green-50 border-green-500">
             <div className="text-sm font-semibold">
-              <span className="leading-none">From <strong className="line-through">US$ 27.00</strong> for</span>
+              <span className="leading-none">From <strong className="line-through">US$ 24.00</strong> for</span>
             </div>
             <span className="text-green-500 text-4xl font-extrabold leading-none">US$ 17,00</span>
           </div>
@@ -74,7 +69,6 @@ export default async function Page() {
       </div>
       <ConfettiEffect />
       <PixelV2 />
-      {catValid && <PixelMeta />}
     </div>
   );
 

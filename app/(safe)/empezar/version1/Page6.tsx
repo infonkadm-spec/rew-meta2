@@ -1,5 +1,5 @@
 import CommentsV2 from "@/components/CommentsV2";
-import VSLBlackAB from "@/components/videos/VSLBlackAB";
+import VSLBlackV2 from "@/components/videos/VSLBlackV2";
 import PixelV2 from "@/components/pixels/PixelV2";
 import Image from "next/image";
 //import PlacesAlert from '@/components/PlacesAlert';
@@ -54,7 +54,7 @@ export default function Page6() {
     <>
       <PixelV2 />
       <div className="flex items-center flex-col gap-1 relative">
-        <VSLBlackAB />
+        <VSLBlackV2 />
         {/*<AlertBoxUrgente
           videoIdA={videoIdA}
           videoIdB={videoIdB}

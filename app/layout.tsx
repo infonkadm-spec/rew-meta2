@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react"
-import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -34,11 +33,6 @@ export default async function RootLayout({
         </head>
       )}
       <body className={`flex-col items-center ${poppins.variable} antialiased`} suppressHydrationWarning>
-        <Script
-          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          data-utmify-prevent-subids=""
-          strategy="afterInteractive"
-        />
         <Suspense fallback={<Loading />}>
           {children}
         </Suspense>
