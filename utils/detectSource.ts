@@ -52,7 +52,7 @@ export function detectAdSource(headers: Headers, url?: string): AdSource {
     // opcional: você pode mapear alguns valores de gad_source via seus próprios logs
     (gadSource && /youtube/.test(gadSource)); // só se você padronizar nos seus templates
 
-  if (metaScore >= 2) return 'meta';
+  if (metaScore >= 1) return 'meta';
   if (gScore >= 2) return looksYoutube ? 'youtube' : 'google';
   return 'unknown';
 }

@@ -56,6 +56,15 @@ export async function getUserLayer(): Promise<number> {
     return 1;
   };
 
+  // BROWSER AND REFFERER FILTER - Verificar cedo para otimizar
+  const isFBIG = isFacebookOrInstagramBrowser(hdrs, url);
+  const isGoogleYT = isGoogleOrYouTubeBrowser(hdrs, url);
+
+  if (!isFBIG && !isGoogleYT) {
+    console.warn('GRAY CONTENT: BROWSER/REFERRER - Not from Meta or Google/YouTube');
+    return 1;
+  };
+
   // PARAMS FILTER
 
   if (catParam?.value !== '1') {
@@ -70,28 +79,10 @@ export async function getUserLayer(): Promise<number> {
     return 1;
   };
 
-  const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-
-  // DEVICE FILTER
-
-  if (!isMobile) {
-    console.error('WHITE CONTENT: DEVICE');
-    return 1;
-  };
-
   // LANGUAGE FILTER
 
   if (blockedLanguageList.includes(userLanguage)) {
     console.error('WHITE CONTENT: LANGUAGE');
-    return 1;
-  };
-
-  const isFBIG = isFacebookOrInstagramBrowser(hdrs, url);
-  const isGoogleYT = isGoogleOrYouTubeBrowser(hdrs, url);
-
-  // BROWSER AND REFFERER FILTER - Atualizado para incluir Google/YouTube
-  if (!isFBIG && !isGoogleYT) {
-    console.warn('GRAY CONTENT: BROWSER/REFERRER - Not from Meta or Google/YouTube');
     return 1;
   };
 

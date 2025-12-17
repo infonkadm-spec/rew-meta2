@@ -159,6 +159,16 @@ export default function Page() {
           </p>
         </Section>
 
+        {/* CTA */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href="https://pay.mycheckoutt.com/019ada55-17e9-7319-bb0e-2b61b337a943?ref="
+            className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          >
+            Buy now for $27
+          </a>
+        </div>
+
         <FooterNote />
       </article>
     </main>

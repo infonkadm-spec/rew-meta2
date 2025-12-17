@@ -75,8 +75,8 @@ export async function isSuspiciousIP(ip: string): Promise<boolean> {
     };
 
   } catch (error) {
-    console.error(error);
-    return true;
+    console.error('IPChecker error:', error);
+    return false;
   };
   
   return false;
