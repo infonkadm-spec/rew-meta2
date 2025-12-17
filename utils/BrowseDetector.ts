@@ -23,10 +23,14 @@ export function isFacebookOrInstagramBrowser(headers: Headers, url?: string): bo
 
   // PARAMS VERIFY
   if (url) {
-    const searchParams = new URL(url).searchParams;
-    if (searchParams.has('fbclid') || searchParams.has('igshid')) {
-      score += 1;
-    };
+    try {
+      const searchParams = new URL(url).searchParams;
+      if (searchParams.has('fbclid') || searchParams.has('igshid')) {
+        score += 1;
+      };
+    } catch {
+      // Invalid URL, skip params check
+    }
   };
 
   // THRESHOLD

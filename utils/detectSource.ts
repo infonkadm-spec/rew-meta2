@@ -6,7 +6,12 @@ export function detectAdSource(headers: Headers, url?: string): AdSource {
   const ref = (headers.get('referer') || '').toLowerCase();
   const xrw = (headers.get('x-requested-with') || '').toLowerCase();
 
-  const search = url ? new URL(url).searchParams : null;
+  let search: URLSearchParams | null = null;
+  try {
+    search = url ? new URL(url).searchParams : null;
+  } catch {
+    search = null;
+  }
 
   // ------ META (FB/IG) ------
   let metaScore = 0;
