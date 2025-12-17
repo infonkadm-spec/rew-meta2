@@ -1,6 +1,6 @@
 import { isSuspiciousIP } from '@/utils/IPChecker';
 import { cookies, headers } from 'next/headers';
-import { isFacebookOrInstagramBrowser, isGoogleOrYouTubeBrowser, isAdSourceBrowser } from '@/utils/BrowseDetector';
+import { isFacebookOrInstagramBrowser, isGoogleOrYouTubeBrowser } from '@/utils/BrowseDetector2';
 
 // SET FILTER DATA
 
@@ -31,7 +31,7 @@ export async function getUserLayer(): Promise<number> {
 
   // GET PARAMS DATA
 
-  const params = new URL(url).searchParams;
+  const params = url ? new URL(url).searchParams : new URLSearchParams();
   const catParam = cks.get('cat_valid');
   const localParam = params.get('test') || '';
 
@@ -83,7 +83,6 @@ export async function getUserLayer(): Promise<number> {
 
   const isFBIG = isFacebookOrInstagramBrowser(hdrs, url);
   const isGoogleYT = isGoogleOrYouTubeBrowser(hdrs, url);
-  const isAnyAdSource = isAdSourceBrowser(hdrs, url);
 
   // BROWSER AND REFFERER FILTER - Atualizado para incluir Google/YouTube
   if (!isFBIG && !isGoogleYT) {
@@ -91,7 +90,7 @@ export async function getUserLayer(): Promise<number> {
     return 1;
   };
 
-  const connectionFilter = await isSuspiciousIP(ip, hdrs);
+  const connectionFilter = await isSuspiciousIP(ip);
 
   // CONNECTION VERIFY
   

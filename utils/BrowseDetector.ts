@@ -1,23 +1,35 @@
-import { detectAdSource, AdSource } from './detectSource';
-
 export function isFacebookOrInstagramBrowser(headers: Headers, url?: string): boolean {
-  const source = detectAdSource(headers, url);
-  return source === 'meta';
-}
 
-// Nova função para detectar Google/YouTube
-export function isGoogleOrYouTubeBrowser(headers: Headers, url?: string): boolean {
-  const source = detectAdSource(headers, url);
-  return source === 'google' || source === 'youtube';
-}
+  const referer = headers.get('referer')?.toLowerCase() || '';
+  const userAgent = headers.get('User-Agent')?.toLowerCase() || '';
+  const requestedWith = headers.get('X-Requested-With')?.toLowerCase() || '';
 
-// Função para detectar qualquer fonte de ads válida
-export function isAdSourceBrowser(headers: Headers, url?: string): boolean {
-  const source = detectAdSource(headers, url);
-  return source !== 'unknown';
-}
+  let score = 0;
 
-// Função para obter o tipo específico de fonte
-export function getAdSource(headers: Headers, url?: string): AdSource {
-  return detectAdSource(headers, url);
-}
+  // USER AGENT VERIFY
+  if (/fb_iab|fbav|instagram|iabmv|fban/i.test(userAgent)) {
+    score += 2;
+  };
+
+  // REQUESTED VERIFY
+  if (requestedWith.includes('com.facebook.katana') || requestedWith.includes('com.instagram.android')) {
+    score += 2;
+  };
+
+  // REFFERER VERIFY
+  if (referer.includes('facebook.com') || referer.includes('instagram.com')) {
+    score += 1;
+  };
+
+  // PARAMS VERIFY
+  if (url) {
+    const searchParams = new URL(url).searchParams;
+    if (searchParams.has('fbclid') || searchParams.has('igshid')) {
+      score += 1;
+    };
+  };
+
+  // THRESHOLD
+  return score >= 1;
+
+};

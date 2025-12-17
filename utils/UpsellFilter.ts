@@ -25,7 +25,7 @@ export async function getUserLayerUpsell(): Promise<number> {
 
   // GET PARAMS DATA
 
-  const params = new URL(url).searchParams;
+  const params = url ? new URL(url).searchParams : new URLSearchParams();
   const localParam = params.get('test') || '';
 
   console.log('HEADERS:', Object.fromEntries(hdrs.entries()));
