@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import ConfettiEffect from "@/components/Confetti";
 
 export default function White() {
@@ -33,7 +34,7 @@ export default function White() {
       {/* MINI RESUMO - 3 vantagens */}
       <section className="w-full bg-slate-50">
         <div className="max-w-6xl mx-auto px-6 py-16 space-y-8">
-          <img src="coursesales-image1.png" alt="Course Sales Image" className="mx-auto rounded-3xl" />
+          <Image src="/coursesales-image1.png" alt="Course Sales Image" width={800} height={600} className="mx-auto rounded-3xl" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
               <h3 className="text-lg font-semibold mb-3 text-slate-900">What’s In The Course?</h3>
@@ -54,7 +55,7 @@ export default function White() {
       {/* CTA FINAL COM DESCONTO */}
       <section className="w-full bg-slate-50 text-center">
         <div className="max-w-6xl mx-auto px-6 py-20 space-y-8">
-          <img src="course-image-computer.png" alt="Course Image" className="mx-auto mb-6" />
+          <Image src="/course-image-computer.png" alt="Course Image" width={800} height={600} className="mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
             Ready To Make Money On YouTube?
           </h2>

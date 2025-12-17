@@ -6,12 +6,6 @@ import Script from "next/script";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-// PRICE LIST
-const priceList: Record<string, string> = {
-  "wbz5t6cu": "24,00",
-  "m1jzg7zb": "29,90",
-};
-
 // COMPONENT TYPES
 type HotmartCheckoutV1Props = {
   name?: string;
