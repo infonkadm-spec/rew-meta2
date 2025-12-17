@@ -12,11 +12,11 @@ export default async function Page() {
   const url = hdrs.get("x-url") || "";
 
   const promoLinks: Record<string, string> = {
-    "1": "https://site.burnerhot.com/yt-checkout-17usd",
-    "2": "https://site.burnerhot.com/yt-checkout-17usd",
-    "3": "https://site.burnerhot.com/yt-checkout-17usd",
+    "1": "https://pay.hotmart.com/M103047413I?off=y7za886w",
+    "2": "https://pay.hotmart.com/M103047413I?off=y7za886w",
+    "3": "https://pay.hotmart.com/M103047413I?off=y7za886w",
   };
-  let promoLink = promoLinks[domainId] || "https://site.burnerhot.com/yt-checkout-17usd";
+  let promoLink = promoLinks[domainId] || "https://pay.hotmart.com/M103047413I?off=y7za886w";
 
   // Repassar todos os parâmetros UTM da URL atual para o promoLink
   try {
